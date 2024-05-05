@@ -1,6 +1,7 @@
 package Ejercicio_4;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -47,15 +48,23 @@ public class StudentManagement {
 
     private static void addStudent(){
         System.out.println("\nAGREGAR NUEVO ALUMNO");
-        System.out.println("\nIngrese el nombre del alumno: ");
-        String name = scanner.nextLine();
-        System.out.println("Ingrese la edad del alumno: ");
-        int age = scanner.nextInt();
-        System.out.println("Ingrese la nota del alumno: ");
-        double qualification = scanner.nextDouble();
+        try {
+            System.out.println("\nIngrese el nombre del alumno: ");
+            String name = scanner.nextLine();
+            System.out.println("Ingrese la edad del alumno: ");
+            int age = scanner.nextInt();
+            System.out.println("Ingrese la nota del alumno: ");
+            double qualification = scanner.nextDouble();
 
-        studentsList.add(new Student(name, age, qualification));
-        System.out.println("Alumno agregado correctamente.");
+
+            studentsList.add(new Student(name, age, qualification));
+            System.out.println("Alumno agregado correctamente.");
+        }catch (InputMismatchException e){
+            System.out.println("¡ERROR! Ingrese una entrada válida.");
+            scanner.nextLine();
+        }catch (IllegalArgumentException e){
+            System.out.println("¡ERROR! "+e.getMessage());
+        }
     }
 
     private static void showStudentsList(){
